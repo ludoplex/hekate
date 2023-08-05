@@ -14,6 +14,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
+
 from keystone import *
 
 CODE = b'''
@@ -35,4 +36,4 @@ try:
 	encoding, count = ks.asm(CODE, 0x0)
 	print("%s = %s (number of statements: %u)" %(CODE, ', '.join([('0x%02x' % (x)) for x in encoding]), count))
 except KsError as e:
-	print("ERROR: %s" %e)
+	print(f"ERROR: {e}")

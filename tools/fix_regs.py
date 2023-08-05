@@ -2,9 +2,8 @@ import re
 import sys
 
 def parse_defs(fname):
-	f = open(fname, "r")
-	lines = f.readlines()
-	f.close()
+	with open(fname, "r") as f:
+		lines = f.readlines()
 	res = {}
 	for l in lines:
 		p = [str(_.strip()) for _ in l.strip().split(" ", 1)]
@@ -14,9 +13,8 @@ def parse_defs(fname):
 mc = parse_defs("mc.def")
 emc = parse_defs("emc.def")
 
-f = open(sys.argv[1], "r")
-buf = f.read()
-f.close()
+with open(sys.argv[1], "r") as f:
+	buf = f.read()
 
 def fix(m):
 	what = m.groups()[0]
@@ -31,6 +29,5 @@ def fix(m):
 
 buf = re.sub(r'([A-Z]+)\(0x([0-9a-fA-F]+)\)', fix, buf)
 
-f = open(sys.argv[2], "w")
-f.write(buf)
-f.close()
+with open(sys.argv[2], "w") as f:
+	f.write(buf)
